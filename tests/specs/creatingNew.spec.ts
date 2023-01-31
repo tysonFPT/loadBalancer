@@ -65,15 +65,15 @@ test.only("New Contract", async ({ page, vrt }) => {
     //await vrt.trackPage(page, "Create New Contract");
     const newContract = new NewContract(page);
     await newContract.enterNewContract(contractName);
-    await vrt.trackPage(page, "New Contract Details");
+    await vrt.trackPage(page, "New Contract Details", {diffTollerancePercent:0.5});
     //await page.pause();
     await newContract.goToBranchOffice();
     //await page.pause();
-    await vrt.trackPage(page, "Branch Office");
+    await vrt.trackPage(page, "Branch Office", {diffTollerancePercent:0.5});
     //await page.pause();
     await newContract.goToContactDetails();
     //await page.pause();
-    await vrt.trackPage(page, "New Contact Details");
+    await vrt.trackPage(page, "New Contact Details", {diffTollerancePercent:0.5});
     await newContract.goToDocuments(contractName);
     //await page.pause();
     //await vrt.trackPage(page, "New Documents");

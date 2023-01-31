@@ -5,6 +5,7 @@ export class LoginPage {
     }
     async login(username: string, password: string, url: string) {
         await this.page.goto(url);
+        //await this.page.pause();
         await this.enterUserName(username);
         await this.enterPassword(password);
         await this.clickOK();
