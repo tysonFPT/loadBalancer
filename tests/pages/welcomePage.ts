@@ -16,10 +16,18 @@ export class WelcomePage {
     }
 
     async closeTabs() {
-        const tabs = this.page.locator(".nw-snippetboard-tablist-tabear");
+        //const tabs = this.page.locator(".nw-snippetboard-tablist-tabear");
+        const tabs = this.page.locator("//ul[@role='tablist']//li");
         let count = await tabs.count();
+        console.log("count= " + count);
+        //await this.page.pause();
         while (count > 1) {
-            await this.page.getByRole('tab').getByRole('link', { name: 'Close' }).nth(count - 1).click();
+            //await this.page.getByRole('tab').getByRole('link', { name: 'Close' }).nth(count - 1).click();
+            //await this.page.locator("//nscale-icon[@alt='Close']")[count-1].click();
+            //await this.page.locator(`(//nscale-icon[@class="iconSmall iconHover"]//div)[${count} - 1]`).click();
+            //await this.page.locator(`(//div[@class="nscale-icon-close_x-mask maskIcon"])[${count}]`).click();
+            await this.page.locator(`(//li[@data-update-zone="tablistZone"])[${count}]//a[@title="Close"]//nscale-icon`).click();
+            //await this.page.pause();
             count--;
         }
     }

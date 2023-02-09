@@ -6,7 +6,7 @@ export class LogoffPage {
     async logoff() {
         await this.page.getByRole('button', { name: 'Open profile menu' }).click();
         await this.page.getByRole('menuitem', { name: 'Log off' }).click();
-        await this.page.getByRole('button', { name: 'Log on again' }).click();        
+        //await this.page.getByRole('button', { name: 'Log on again' }).click();        
     }
   
     async clickOK() {

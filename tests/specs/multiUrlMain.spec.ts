@@ -45,7 +45,7 @@ test.afterEach(async ({ page }) => {
 });
 
 for (const record of records) {
-    test(`fooo: ${record.test_case}`, async ({ page, vrt }) => {
+    test(`Test: ${record.test_case}`, async ({ page, vrt }) => {
       console.log(record.test_case, record.url);
       const loginPage = new LoginPage(page);
       const welcomePage = new WelcomePage(page);

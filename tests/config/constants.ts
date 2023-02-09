@@ -10,7 +10,7 @@ export const config: Config = {
 };
 
 export const dmsUrl = "https://dms-sales-qa.eon.com/nscale_web/nw/login/noImmediateLogin/";
-export const username = "M86152@TDMS";
-export const password = "BlueWater@22";
+export const username = "eem_cm_user";
+export const password = "test";
 export const contractName = "Test Regresssion";
 export const contractPartner = "Test ContractPartner01";
