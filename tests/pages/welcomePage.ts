@@ -3,6 +3,19 @@ export class WelcomePage {
     constructor(public page: Page) {
     }
 
+    async openOnWelcomeTab() {
+        const general = this.page.getByRole('option', { name: 'General' }).locator('div');
+        await this.page.pause();
+        await general.hover();
+        const optionWelcome = this.page.getByRole('option', { name: 'Willkommen' }).locator('div');
+        await optionWelcome.waitFor({state:"visible"});
+        await optionWelcome.click();
+        //const welcomeTab = this.page.locator('tab_welcome1_EEM');
+        const welcomeTab =this.page.getByRole('tab', { name: 'Willkommen' }).getByTitle('Willkommen').getByText('Willkommen');
+        await welcomeTab.waitFor({ state: "visible" });
+        await welcomeTab.click();
+    }
+
     async checkArrow() {
         const arrow = this.page.getByRole('button', { name: 'Fold in the side menu' })
         await arrow.waitFor({ state: "visible" });
@@ -30,6 +43,7 @@ export class WelcomePage {
             //await this.page.pause();
             count--;
         }
+        await this.page.pause();
     }
 
     async clickOnNewCorpoOfficeContract() {
@@ -59,9 +73,10 @@ export class WelcomePage {
     }
     async clickOnContracts() {
         const contractsBtn = this.page.getByRole('link', { name: ' Contracts' });
+        //await this.page.pause();
         const contractsTab = this.page.getByRole('tab', { name: 'Search Contracts' });
         await contractsBtn.click();
-        await contractsTab.waitFor({ state: "visible" });
+        //await contractsTab.waitFor({ state: "visible" });
     }
     async clickOnSelfService() {
         const selfservBtn = this.page.getByRole('link', { name: ' Self Service' });

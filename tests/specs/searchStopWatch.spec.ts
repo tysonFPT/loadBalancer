@@ -4,6 +4,7 @@ import { Stopwatch } from "ts-stopwatch";
 import { LoginPage } from "../pages/loginPage";
 //import { LogoffPage } from "../pages/log_offPage";
 import { WelcomePage } from "../pages/welcomePage";
+import { SearchContractsPage } from "../pages/searchContractsPage";
 import { config, username, password, dmsUrl } from "../config/constants";
 
 type TestFixtures = {
@@ -34,8 +35,10 @@ test.beforeEach(async ({ page, vrt }) => {
     const loginPage = new LoginPage(page);
     const welcomePage = new WelcomePage(page);
     stopwatch.start();
-    await loginPage.login(username, password, dmsUrl)
-    await welcomePage.closeTabs();
+    await loginPage.login(username, password, dmsUrl);
+    await welcomePage.openOnWelcomeTab();
+    await page.pause();  
+    //await welcomePage.closeTabs();
 });
 
 test.afterEach(async ({ page, vrt }) => {
@@ -54,11 +57,17 @@ test("Contract Partners", async ({ page, vrt }) => {
     console.log(stopwatch.getTime());
 });
 
-test("Search Contracts", async ({ page, vrt }) => {
+test.only("Search Contracts", async ({ page, vrt }) => {
     const welcomePage = new WelcomePage(page);   
+    const searchContractsPage = new SearchContractsPage(page);
     expect(welcomePage.checkArrow()).toBeTruthy();   
     await welcomePage.clickOnContracts();
     expect(welcomePage.checkArrow()).toBeTruthy();
+    //const btnSearch = this.page.getByRole('region', { name: 'Snippet Search in Contracts' }).getByRole('button', { name: 'Search' })
+    // first row :    locator('td:nth-child(9)').first()
+    await searchContractsPage.firstRowSearchResults();
+    await page.pause();
+    expect(searchContractsPage.contractName()).toBeTruthy();
     await vrt.trackPage(page, "Search Contracts");
     console.log(stopwatch.getTime());
 });
