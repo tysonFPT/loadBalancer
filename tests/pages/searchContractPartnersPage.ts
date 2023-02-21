@@ -1,5 +1,5 @@
 import { expect, Page, test as base } from "@playwright/test";
-export class SearchContractsPage {
+export class SearchContractPartnersPage {
     //contract: string
     constructor(public page: Page) {
         this.page = page;
@@ -7,7 +7,7 @@ export class SearchContractsPage {
     }
 
     async firstRowSearchResults() {
-        const btnSearch = this.page.getByRole('region', { name: 'Snippet Search in Contracts' }).getByRole('button', { name: 'Search' });
+        const btnSearch = this.page.getByRole('region', { name: 'Snippet Search in Contract Partners' }).getByRole('button', { name: 'Search' });
         const firstRow = this.page.locator('td:nth-child(9)').first();
         await btnSearch.click();
         await firstRow.waitFor({ state: "visible" });
@@ -15,10 +15,10 @@ export class SearchContractsPage {
         await firstRow.dblclick();
     }
 
-    async contractName() {
-        const contractName = this.page.locator('#contractNameField');
-        contractName.waitFor({ state: "visible" });
-        return contractName;
+    async contractPartnerName() {
+        const contractPartnerName = this.page.getByLabel('Contract Partner Name*');
+        await contractPartnerName.waitFor({ state: "visible" });
+        return contractPartnerName;
     }
 
     async clickCancel() {

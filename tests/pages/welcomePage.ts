@@ -5,7 +5,7 @@ export class WelcomePage {
 
     async openOnWelcomeTab() {
         const general = this.page.getByRole('option', { name: 'General' }).locator('div');
-        await this.page.pause();
+        //await this.page.pause();
         await general.hover();
         const optionWelcome = this.page.getByRole('option', { name: 'Willkommen' }).locator('div');
         await optionWelcome.waitFor({state:"visible"});
@@ -69,7 +69,7 @@ export class WelcomePage {
         const contractPartnBtn = this.page.getByRole('link', { name: ' Contract Partners' });
         const contractPartnTab = this.page.getByRole('tab', { name: 'Search Contract Partners' }).getByTitle('Search Contract Partners');
         await contractPartnBtn.click();
-        await contractPartnTab.waitFor({ state: "visible" });
+        //await contractPartnTab.waitFor({ state: "visible" });
     }
     async clickOnContracts() {
         const contractsBtn = this.page.getByRole('link', { name: ' Contracts' });

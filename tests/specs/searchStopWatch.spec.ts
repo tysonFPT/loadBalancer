@@ -5,6 +5,7 @@ import { LoginPage } from "../pages/loginPage";
 //import { LogoffPage } from "../pages/log_offPage";
 import { WelcomePage } from "../pages/welcomePage";
 import { SearchContractsPage } from "../pages/searchContractsPage";
+import { SearchContractPartnersPage } from "../pages/searchContractPartnersPage";
 import { config, username, password, dmsUrl } from "../config/constants";
 
 type TestFixtures = {
@@ -29,6 +30,7 @@ test.beforeAll(async ({ vrt }) => {
 test.afterAll(async ({ page, vrt }) => {
     await page.close();
     await vrt.stop();
+    console.log("Time: " + stopwatch.getTime()/1000 + " seconds");
 });
 
 test.beforeEach(async ({ page, vrt }) => {
@@ -37,27 +39,31 @@ test.beforeEach(async ({ page, vrt }) => {
     stopwatch.start();
     await loginPage.login(username, password, dmsUrl);
     await welcomePage.openOnWelcomeTab();
-    await page.pause();  
+    //await page.pause();  
     //await welcomePage.closeTabs();
 });
 
 test.afterEach(async ({ page, vrt }) => {
     const welcomePage = new WelcomePage(page);
-    await welcomePage.closeTabs();
+    //await welcomePage.closeTabs();
 });
 
 
-test("Contract Partners", async ({ page, vrt }) => {
-    const welcomePage = new WelcomePage(page);   
+test.only("Contract Partners", async ({ page, vrt }) => {
+    const welcomePage = new WelcomePage(page); 
+    const searchContrPartnPage = new SearchContractPartnersPage(page);  
     expect(welcomePage.checkArrow()).toBeTruthy(); 
-    await page.pause();  
+    //await page.pause();  
     await welcomePage.clickOnContractPartners();
     expect(welcomePage.checkArrow()).toBeTruthy();
+    await searchContrPartnPage.firstRowSearchResults();
+    expect(searchContrPartnPage.contractPartnerName()).toBeTruthy();
+    console.log("Bye bye!");
     await vrt.trackPage(page, "Contract Partners");
     console.log(stopwatch.getTime());
 });
 
-test.only("Search Contracts", async ({ page, vrt }) => {
+test("Search Contracts", async ({ page, vrt }) => {
     const welcomePage = new WelcomePage(page);   
     const searchContractsPage = new SearchContractsPage(page);
     expect(welcomePage.checkArrow()).toBeTruthy();   
@@ -66,10 +72,11 @@ test.only("Search Contracts", async ({ page, vrt }) => {
     //const btnSearch = this.page.getByRole('region', { name: 'Snippet Search in Contracts' }).getByRole('button', { name: 'Search' })
     // first row :    locator('td:nth-child(9)').first()
     await searchContractsPage.firstRowSearchResults();
-    await page.pause();
+    //await page.pause();
     expect(searchContractsPage.contractName()).toBeTruthy();
-    await vrt.trackPage(page, "Search Contracts");
-    console.log(stopwatch.getTime());
+    console.log("Good bye !!!");
+    await vrt.trackPage(page, "Search Contract Partners page");
+    
 });
 
 test("Self Service", async ({ page, vrt }) => {
