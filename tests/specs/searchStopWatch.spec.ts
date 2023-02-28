@@ -31,6 +31,7 @@ test.afterAll(async ({ page, vrt }) => {
     await page.close();
     await vrt.stop();
     console.log("Time: " + stopwatch.getTime()/1000 + " seconds");
+   // File.writeTextFile()
 });
 
 test.beforeEach(async ({ page, vrt }) => {

@@ -40,13 +40,13 @@ test.beforeEach(async ({ page, vrt }) => {
 
 test.afterEach(async ({ page, vrt }) => {
     const welcomePage = new WelcomePage(page);
-    await welcomePage.closeTabs();
+    //await welcomePage.closeTabs();
 });
 
 
 test("The last session", async ({ page, vrt }) => {
     const welcomePage = new WelcomePage(page);   
-    expect(welcomePage.checkArrow()).toBeTruthy(); 
+    //expect(welcomePage.checkArrow()).toBeTruthy(); 
     //await page.pause();  
     expect(welcomePage.checkArrow()).toBeTruthy();
     await vrt.trackPage(page, "The last session");

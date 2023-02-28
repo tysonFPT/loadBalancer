@@ -10,7 +10,7 @@ export const config: Config = {
 };
 
 export const dmsUrl = "https://dms-sales-qa.eon.com/nscale_web/nw/login/noImmediateLogin/";
-export const username = "TEST_AUTOMATION_USER1@nscale";
+export const username = "TEST_AUTOMATION_USER2@nscale";
 export const password = "test";
 export const contractName = "Test Regresssion";
 export const contractPartner = "Test ContractPartner01";
