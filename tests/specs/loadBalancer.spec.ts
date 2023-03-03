@@ -2,7 +2,7 @@ import { expect, Page, test as base } from "@playwright/test";
 import { PlaywrightVisualRegressionTracker, Config } from "@visual-regression-tracker/agent-playwright";
 import { Stopwatch } from "ts-stopwatch";
 import { LoginPage } from "../pages/loginPage";
-//import { LogoffPage } from "../pages/log_offPage";
+import { LogoffPage } from "../pages/log_offPage";
 import { WelcomePage } from "../pages/welcomePage";
 import { config, username, password, dmsUrl } from "../config/constants";
 
@@ -26,8 +26,10 @@ test.beforeAll(async ({ vrt }) => {
 });
 
 test.afterAll(async ({ page, vrt }) => {
-    await page.close();
     await vrt.stop();
+    const log_offPage = new LogoffPage(page);
+    await log_offPage.logoff();
+    await page.close();
 });
 
 test.beforeEach(async ({ page, vrt }) => {

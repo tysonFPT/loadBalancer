@@ -50,7 +50,7 @@ test.afterEach(async ({ page, vrt }) => {
 });
 
 
-test.only("Contract Partners", async ({ page, vrt }) => {
+test("Contract Partners", async ({ page, vrt }) => {
     const welcomePage = new WelcomePage(page); 
     const searchContrPartnPage = new SearchContractPartnersPage(page);  
     expect(welcomePage.checkArrow()).toBeTruthy(); 
@@ -60,11 +60,11 @@ test.only("Contract Partners", async ({ page, vrt }) => {
     await searchContrPartnPage.firstRowSearchResults();
     expect(searchContrPartnPage.contractPartnerName()).toBeTruthy();
     console.log("Bye bye!");
-    await vrt.trackPage(page, "Contract Partners");
+    await vrt.trackPage(page, "Contract Partners Page");
     console.log(stopwatch.getTime());
 });
 
-test("Search Contracts", async ({ page, vrt }) => {
+test.only("Search Contracts", async ({ page, vrt }) => {
     const welcomePage = new WelcomePage(page);   
     const searchContractsPage = new SearchContractsPage(page);
     expect(welcomePage.checkArrow()).toBeTruthy();   
@@ -76,7 +76,7 @@ test("Search Contracts", async ({ page, vrt }) => {
     //await page.pause();
     expect(searchContractsPage.contractName()).toBeTruthy();
     console.log("Good bye !!!");
-    await vrt.trackPage(page, "Search Contract Partners page");
+    await vrt.trackPage(page, "Search Contracts page");
     
 });
 

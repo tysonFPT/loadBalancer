@@ -13,6 +13,8 @@ export class SearchContractsPage {
         await firstRow.waitFor({ state: "visible" });
         await firstRow.click();
         await firstRow.dblclick();
+        const heading = this.page.getByRole('heading', { name: 'Energy Markets Quick Actions' });
+        await heading.waitFor({ state: "visible" });
     }
 
     async contractName() {
