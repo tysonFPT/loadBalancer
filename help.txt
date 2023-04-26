@@ -1,0 +1,16 @@
+#layoutlink_DMSWestnetz_welcome_overview__layoutselector_welcome1_DMSWestnetz_DMSWestnetz_welcome_regelwerke__0
+
+
+
+Ihre Anwendungen :    //*[@id="layoutlink_DMSWestnetz_welcome_overview__layoutselector_welcome1_DMSWestnetz_DMSWestnetz_welcome_regelwerke__0"]
+BAG :                 //div[contains(text(),'BAG')]
+Kommunalarchiv :      //td[contains(text(),'Kommunalarchiv')]
+Eingang        :      //td[text()='Eingang']
+KM München   :       //td[text()='KM München']
+H3 title :           //h3[@title='KM München']
+
+
+right-click :           page.getByText('BAG').click({ button: 'right' });
+option from context menu :    page.getByRole('menuitem', { name: 'Properties' }).getByText('Properties').click();  
+tree KM Munchen  :   //span[@class='t-tree-label d-flex treeNodeSelect t-selected-leaf-node'][contains(text(),'KM München')]
+icons of navigational search :      //div[@class="nscale-icon-collectionnonav_s-mask maskIcon"]
