@@ -6,9 +6,9 @@ import { LogoffPage } from "../pages/log_offPage";
 import { WelcomePage } from "../pages/welcomePage";
 import { SearchContractsPage } from "../pages/searchContractsPage";
 import { SearchContractPartnersPage } from "../pages/searchContractPartnersPage";
-import { config, usernameStopWatch, password, dmsUrl } from "../config/constants";
+import { NextPage } from "../pages/nextPage";
+import { config, usernameStopWatch, password, hostnameGrid } from "../config/constants";
 import { __dirname, filename } from "../config/constants";
-
 
 import fs from 'fs';
 import { readFileSync, writeFileSync, appendFile } from 'fs';
@@ -56,9 +56,11 @@ test.beforeEach(async ({ page, vrt }) => {
     const loginPage = new LoginPage(page);
     const welcomePage = new WelcomePage(page);
     stopwatch.start();
-    await loginPage.login(usernameStopWatch, password, dmsUrl);
+    await loginPage.login(usernameStopWatch, password, hostnameGrid);
+    await welcomePage.switchToDmsGrid();
+
     await welcomePage.openOnWelcomeTab();
-    //await page.pause();  
+    await page.pause();  
     //await welcomePage.closeTabs();
     console.log("before each End");
 });
@@ -73,37 +75,23 @@ test.afterEach(async ({ page, vrt }) => {
 }); 
 
 
-test("Contract Partners", async ({ page, vrt }) => {
-    const welcomePage = new WelcomePage(page); 
-    const searchContrPartnPage = new SearchContractPartnersPage(page);  
-    expect(welcomePage.checkArrow()).toBeTruthy(); 
-    await welcomePage.clickOnContractPartners();
-    //await page.pause();
-    expect(welcomePage.checkArrow()).toBeTruthy();
-    await searchContrPartnPage.firstRowSearchResults();
-    //await page.pause();
-    expect(searchContrPartnPage.contractPartnerName()).toBeTruthy();
-    await page.waitForTimeout(2345);
-    console.log("Contract Partners before vrt");
-    await vrt.trackPage(page, "Contract Partners Page", { diffTollerancePercent: 0.9999 });
-    //console.log(stopwatch.getTime());
-});
-
-test("Search Contracts", async ({ page, vrt }) => {
+test("KM Munchen", async ({ page, vrt }) => {
     const welcomePage = new WelcomePage(page);   
     const searchContractsPage = new SearchContractsPage(page);
+    const nextPage = new NextPage(page);
     expect(welcomePage.checkArrow()).toBeTruthy();   
-    await welcomePage.clickOnContracts();
+    await welcomePage.clickOnGRID();
     //await page.pause();
     expect(welcomePage.checkArrow()).toBeTruthy();
     //const btnSearch = this.page.getByRole('region', { name: 'Snippet Search in Contracts' }).getByRole('button', { name: 'Search' })
     // first row :    locator('td:nth-child(9)').first()
-    await searchContractsPage.firstRowSearchResults();
+    
     //await page.pause();
-    expect(searchContractsPage.contractName()).toBeTruthy();
+    //expect(searchContractsPage.contractName()).toBeTruthy();
     await page.waitForTimeout(2345);
-    console.log("Search Contracts before vrt");
-    await vrt.trackPage(page, "Search Contracts page", { diffTollerancePercent: 0.9999 });
+    console.log("KM Munchen before vrt");
+    await vrt.trackPage(page, "KM Munchen", { diffTollerancePercent: 0.9999 });
+    //await nextPage.openContextMenu(element)
     
 });
 

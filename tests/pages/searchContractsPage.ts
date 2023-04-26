@@ -9,7 +9,11 @@ export class SearchContractsPage {
     async firstRowSearchResults() {
         const btnSearch = this.page.getByRole('region', { name: 'Snippet Search in Contracts' }).getByRole('button', { name: 'Search' });
         const firstRow = this.page.locator('td:nth-child(9)').first();
+        await this.page.waitForTimeout(4567);
+        await btnSearch.waitFor();
         await btnSearch.click();
+        await this.page.waitForLoadState();
+        await this.page.waitForTimeout(4567);
         await firstRow.waitFor({ state: "visible" });
         await firstRow.click();
         await firstRow.dblclick();
@@ -18,15 +22,18 @@ export class SearchContractsPage {
     }
 
     async contractName() {
-        const contractName = this.page.locator('#contractNameField');
-        contractName.waitFor({ state: "visible" });
+        await this.page.waitForTimeout(2345);
+        //const contractName = this.page.locator('#contractNameField');
+        const contractName = this.page.getByText('Contract Name*');
+        //await contractName.waitFor({ timeout: 88000, state: "visible" });
+        //contractName.waitFor({ state: "visible" });
         return contractName;
     }
 
-    async clickCancel() {
+   /*  async clickCancel() {
         await Promise.all([
             this.page.waitForNavigation({ waitUntil: "networkidle" }),
             await this.page.getByRole('link', { name: 'Cancel' }).click()
         ])
-    }
+    } */
 }

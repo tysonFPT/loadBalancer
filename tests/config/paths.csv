@@ -1,4 +1,4 @@
 "test_case","url"
-"url=dms-sales-qa.eon.com_1","https://dms-sales-qa.eon.com/nscale_web/nw/login/noImmediateLogin/"
-"url=dms-sales-qa.eon.com_2","https://dms-sales-qa.eon.com/nscale_web/nw/login/noImmediateLogin/"
-"url=dms-sales-qa.eon.com_3","https://dms-sales-qa.eon.com/nscale_web/nw/login/noImmediateLogin/"
+"url=dms-grid-qa.intranet","https://dms-grid-qa.intranet.eon.com/nscale_web/nw/login"
+"url=dms-grid-qa-web-C1","https://10.14.1.122:8453/nscale_web/nw/login"
+"url=dms-grid-qa-web-D1","https://10.14.1.123:8453/nscale_web/nw/login"
