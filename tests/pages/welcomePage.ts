@@ -3,6 +3,18 @@ export class WelcomePage {
     constructor(public page: Page) {
     }
 
+    async openRepository() {
+        const general = this.page.getByRole('option', { name: 'General' }).locator('div');
+        const optionRepository = this.page.getByRole('option', { name: 'Repository' });
+        await general.hover();
+        await optionRepository.waitFor({state:"visible"});
+        //await this.page.pause();
+        await optionRepository.click();
+        const defaultList = this.page.getByRole('link', { name: 'Default list' });
+        //await defaultList.waitFor({ state: "visible" });
+        //await welcomeTab.click();
+    }
+
     async clickOnGRID() {
         //const tabAnwendungen = this.page.locator('//*[@id="layoutlink_DMSWestnetz_welcome_overview__layoutselector_welcome1_DMSWestnetz_DMSWestnetz_welcome_regelwerke__0"]');
         const tabAnwendungen = this.page.locator("//a[contains(text(),'Ihre Anwendungen')]");
@@ -28,11 +40,8 @@ export class WelcomePage {
         await tdEingang.dblclick();
         await tdKMMünchen.waitFor({ state: "visible" });
         await tdKMMünchen.click();
-        await tdKMMünchen.dblclick();
-
-        
+        await tdKMMünchen.dblclick();        
         await this.page.waitForLoadState();
-
         await btnBAG.waitFor({ state: "visible" });
     }
 

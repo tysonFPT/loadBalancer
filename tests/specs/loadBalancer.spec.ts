@@ -46,7 +46,7 @@ test.afterEach(async ({ page }) => {
 });
 
 test("LoadBalancer -dms-grid-qa.intranet", async ({ page, vrt }) => {
-    console.log("dms-grid-qa.intranet");
+    console.log("dms-grid-qa.intranet hostnameGrid");
     const loginPage = new LoginPage(page);
     const welcomePage = new WelcomePage(page);
     await loginPage.login(usernameLB1, password, hostnameGrid);
@@ -58,7 +58,7 @@ test("LoadBalancer -dms-grid-qa.intranet", async ({ page, vrt }) => {
 });
 
 test("LoadBalancer -ipAdressWeb1", async ({ page, vrt }) => {
-    console.log("dms-grid-qa.intranet");
+    console.log("dms-grid-qa.intranet ipAdressWeb1");
     const loginPage = new LoginPage(page);
     const welcomePage = new WelcomePage(page);
     await loginPage.login(usernameLB2, password, ipAdressWeb1);
@@ -70,7 +70,7 @@ test("LoadBalancer -ipAdressWeb1", async ({ page, vrt }) => {
 });
 
 test("LoadBalancer -ipAdressWeb2", async ({ page, vrt }) => {
-    console.log("dms-grid-qa.intranet");
+    console.log("dms-grid-qa.intranet ipAdressWeb2");
     const loginPage = new LoginPage(page);
     const welcomePage = new WelcomePage(page);
     await loginPage.login(usernameLB3, password, ipAdressWeb2);
