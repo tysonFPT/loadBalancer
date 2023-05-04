@@ -14,3 +14,9 @@ right-click :           page.getByText('BAG').click({ button: 'right' });
 option from context menu :    page.getByRole('menuitem', { name: 'Properties' }).getByText('Properties').click();  
 tree KM Munchen  :   //span[@class='t-tree-label d-flex treeNodeSelect t-selected-leaf-node'][contains(text(),'KM München')]
 icons of navigational search :      //div[@class="nscale-icon-collectionnonav_s-mask maskIcon"]
+
+
+ //div[@class="nw-snippetboard-tabear sideBySide"]
+
+nw-snippetboard-tabear sideBySide
+check Search tab :       //div[@class="nw-snippetboard-tabear sideBySide"]//span[contains(text(),'Search')]

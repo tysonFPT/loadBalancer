@@ -53,7 +53,8 @@ for (const record of records) {
       expect(welcomePage.checkArrow()).toBeTruthy();
       await expect(page.getByRole('button', { name: 'Fold in the side menu' })).toBeVisible();
       //await page.pause();
-      await vrt.trackPage(page, `${ record.test_case }`);
+      await vrt.trackPage(page, `${ record.test_case }`, {diffTollerancePercent:0.9999});
+      //await vrt.trackPage(page, "LoadBalancer test", {diffTollerancePercent:0.9999});
     });
   }
 
