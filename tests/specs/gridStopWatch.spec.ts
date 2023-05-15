@@ -72,7 +72,7 @@ test.afterEach(async ({ page, vrt }) => {
     console.log("after each End");
 });
 
-test.only("Default Search", async ({ page, vrt }) => {
+test.only("Navigation Search", async ({ page, vrt }) => {
     const welcomePage = new WelcomePage(page);
     const nextPage = new NextPage(page);
     //await page.pause();
@@ -81,7 +81,25 @@ test.only("Default Search", async ({ page, vrt }) => {
     await welcomePage.openRepository();
     await page.waitForLoadState();
     await page.waitForTimeout(1234);
-    await nextPage.openContextMenuInto("Search");    // select option Search in context menu
+    await nextPage.selectOptionInContextMenu("Search", "navigation");    // select option Search in context menu
+    await page.waitForLoadState();
+    await page.waitForTimeout(1234);
+    await nextPage.maskNavigationSearch();
+    console.log("Navigation Search before vrt");
+    await vrt.trackPage(page, "Navigation Search", { diffTollerancePercent: 0.9999 });
+    //await nextPage.openContextMenu(element)
+});
+
+test("Default Search", async ({ page, vrt }) => {
+    const welcomePage = new WelcomePage(page);
+    const nextPage = new NextPage(page);
+    //await page.pause();
+    expect(welcomePage.checkArrow()).toBeTruthy();
+    //await page.pause();
+    await welcomePage.openRepository();
+    await page.waitForLoadState();
+    await page.waitForTimeout(1234);
+    await nextPage.selectOptionInContextMenu("Search", "default");    // select option Search in context menu
     await page.waitForLoadState();
     await page.waitForTimeout(1234);
     await nextPage.maskDefaultSearch();
@@ -89,6 +107,7 @@ test.only("Default Search", async ({ page, vrt }) => {
     await vrt.trackPage(page, "Default Search", { diffTollerancePercent: 0.9999 });
     //await nextPage.openContextMenu(element)
 });
+
 
 test("KM Munchen", async ({ page, vrt }) => {
     const welcomePage = new WelcomePage(page);
