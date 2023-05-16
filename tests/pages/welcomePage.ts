@@ -7,7 +7,7 @@ export class WelcomePage {
         const general = this.page.getByRole('option', { name: 'General' }).locator('div');
         const optionRepository = this.page.getByRole('option', { name: 'Repository' });
         await general.hover();
-        await optionRepository.waitFor({state:"visible"});
+        await optionRepository.waitFor({ state: "visible" });
         //await this.page.pause();
         await optionRepository.click();
         const defaultList = this.page.getByRole('link', { name: 'Default list' });
@@ -23,7 +23,7 @@ export class WelcomePage {
         const tdEingang = this.page.locator("//td[text()='Eingang']");
         const tdKMMünchen = this.page.locator("//td[text()='KM München']");
         const headKMMünchen = this.page.$("//h3[@title='KM München']")
-        
+
         //await this.page.pause();
         await tabAnwendungen.click();
         await this.page.waitForLoadState();
@@ -40,7 +40,7 @@ export class WelcomePage {
         await tdEingang.dblclick();
         await tdKMMünchen.waitFor({ state: "visible" });
         await tdKMMünchen.click();
-        await tdKMMünchen.dblclick();        
+        await tdKMMünchen.dblclick();
         await this.page.waitForLoadState();
         await btnBAG.waitFor({ state: "visible" });
     }
@@ -49,7 +49,7 @@ export class WelcomePage {
         const iconButton = this.page.locator("//button[@class='icon-button']");
         await iconButton.click();
         await this.page.waitForLoadState();
-        await this.page.pause();
+        //await this.page.pause();
         const arrowDropDown = this.page.locator("//nscale-icon[@class='dropdown-side-icon iconSmall iconHover']");
         const devaultDmsGrid = this.page.locator("//div[@id='docArea-displayname'][contains(text(),'DMS@GRID')]");
         console.log("devaultDmsGrid = " + devaultDmsGrid);
@@ -60,7 +60,7 @@ export class WelcomePage {
         const visible = await devaultDmsGrid.isVisible();
         console.log("visible = " + visible);
         if (!visible) {
-            
+
             await arrowDropDown.click();
             await optionDmsGrid.waitFor({ state: "visible" });
             await this.page.waitForTimeout(1234);
@@ -69,8 +69,6 @@ export class WelcomePage {
         } else {
             await this.page.locator('.nw-recentboards-overlay').click();
         }
-        await this.page.pause();
-        
     }
 
     async openOnWelcomeTab() {
@@ -79,7 +77,7 @@ export class WelcomePage {
         await general.hover();
         const optionWelcome = this.page.getByRole('option', { name: 'Welcome' }).locator('div');
         //const optionWelcome = this.page.locator("//span[@class='nw-snippetboard-tabearlabels']//span[1]");
-        await optionWelcome.waitFor({state:"visible"});
+        await optionWelcome.waitFor({ state: "visible" });
         await optionWelcome.click();
         //const welcomeTab = this.page.locator('tab_welcome1_EEM');
         //const welcomeTab =this.page.getByRole('tab', { name: 'Willkommen' }).getByTitle('Willkommen').getByText('Willkommen');

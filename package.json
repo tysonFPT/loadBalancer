@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.31.2"
+    "@playwright/test": "^1.33"
   },
   "dependencies": {
     "@visual-regression-tracker/agent-playwright": "^5.2.2",

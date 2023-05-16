@@ -12,6 +12,17 @@ export class NextPage {
         //this.firstRow = page.locator('td:nth-child(4)').first(); //alebo  locator('.nscale-icon-empty-mask').first() alebo  locator('td:nth-child(3)').first()
     }
 
+    async indexMask() {
+        const inpName = this.page.getByLabel('Name*');
+        const inpComment = this.page.getByLabel('Comment');
+
+        //await this.page.pause();
+        await this.page.waitForTimeout(4567);
+        await inpComment.waitFor({ state: "visible" });
+        await expect(inpComment).toBeVisible();
+        //await this.page.pause();
+    }
+
     async maskDefaultSearch() {
         const inpName = this.page.locator("//div/label[text()='Name']/following-sibling::input");
         const inpVerCreation = this.page.locator("//div/label[text()='Version creation']/following-sibling::div//input"); // 2 inputs
@@ -23,34 +34,31 @@ export class NextPage {
         const objektlasse = this.page.getByLabel('Objektklasse');
         const register = this.page.getByLabel('Register');
         const Equimentnummer = this.page.getByLabel('Equimentnummer');
-        await this.page.pause();
+        //await this.page.pause();
         await inpName.waitFor({ state: "visible" });
         await expect(inpName).toBeVisible();
 
     }
 
-
-
     async selectOptionInContextMenu(option, mode) {
-        console.log(' mode = ' + mode);
-        var firstRow:any;
+        console.log(' option = ' + option + ' ; mode = ' + mode);
+        var firstRow: any;
         if (mode == "default") {
             firstRow = this.page.locator('//div[@class="nscale-icon-collection_s-mask maskIcon"]').first();
-            console.log(' default search ');
+            //console.log(' default search ');
         } else {
             firstRow = this.page.locator('//div/div[@class="nscale-icon-collectionnonav_s-mask maskIcon"]').first();
-            console.log(' navigation search ');
+            //console.log(' navigation search ');
         }
-        await this.page.pause();
+        //await this.page.pause();
         //const firstRow = this.page.locator('td:nth-child(4)').first(); //alebo  locator('.nscale-icon-empty-mask').first() alebo  locator('td:nth-child(3)').first()
         //const firstRow = this.page.locator('//div[@class="nscale-icon-collection_s-mask maskIcon"]').first();
         const optProperties = this.page.getByRole('menuitem', { name: 'Properties' }).getByText('Properties');
-        await this.page.pause();
+        //await this.page.pause();
         await firstRow.waitFor({ state: "visible" });
         await firstRow.click({ button: 'right' });
         await optProperties.waitFor({ state: "visible" });
         await this.page.getByRole('menuitem', { name: `${option}` }).getByText(`${option}`).click();
-        await this.page.pause();
         await this.page.waitForLoadState();
         //await this.page.locator(('//div[@class="nw-snippetboard-tabear sideBySide"]//span[contains(text(),(`${option}`)]').waitFor({ state: "visible" });
         //return arrow;
@@ -63,9 +71,9 @@ export class NextPage {
         const register = this.page.getByLabel('Register');
         const Equimentnummer = this.page.getByLabel('Equimentnummer');
         //await this.page.pause();
+        await this.page.waitForTimeout(2345);
         await region.waitFor({ state: "visible" });
-        await expect(region).toBeVisible();        
-        //await this.page.pause();
+        await expect(region).toBeVisible();
     }
 
     async clickOnGRID() {
@@ -76,7 +84,6 @@ export class NextPage {
         const tdEingang = this.page.locator("//td[text()='Eingang']");
         const tdKMMünchen = this.page.locator("//td[text()='KM München']");
         const headKMMünchen = this.page.$("//h3[@title='KM München']")
-
         //await this.page.pause();
         await tabAnwendungen.click();
         await this.page.waitForLoadState();
@@ -95,7 +102,6 @@ export class NextPage {
         await tdKMMünchen.click();
         await tdKMMünchen.dblclick();
 
-
         await this.page.waitForLoadState();
 
         await btnBAG.waitFor({ state: "visible" });
@@ -105,7 +111,7 @@ export class NextPage {
         const iconButton = this.page.locator("//button[@class='icon-button']");
         await iconButton.click();
         await this.page.waitForLoadState();
-        await this.page.pause();
+        //await this.page.pause();
         const arrowDropDown = this.page.locator("//nscale-icon[@class='dropdown-side-icon iconSmall iconHover']");
         const devaultDmsGrid = this.page.locator("//div[@id='docArea-displayname'][contains(text(),'DMS@GRID')]");
         console.log("devaultDmsGrid = " + devaultDmsGrid);
@@ -131,7 +137,6 @@ export class NextPage {
 
     async openOnWelcomeTab() {
         const general = this.page.getByRole('option', { name: 'General' }).locator('div');
-        //await this.page.pause();
         await general.hover();
         const optionWelcome = this.page.getByRole('option', { name: 'Willkommen' }).locator('div');
         await optionWelcome.waitFor({ state: "visible" });
@@ -143,8 +148,7 @@ export class NextPage {
         //await welcomeTab.click();
     }
 
-    /*    async openContextMenu(element, optProperties) {
-           
+    /*    async openContextMenu(element, optProperties) {           
            await element.waitFor({ state: "visible" });
            await element.click({ button: 'right' });
            await optProperties.waitFor({ state: "visible" });
@@ -152,6 +156,4 @@ export class NextPage {
            await this.page.locator("(//span[@data-update-zone='^']//span)[contains(text(), 'Properties')]").waitFor({ state: "visible" });
            //return arrow;
        } */
-
-
 } 
