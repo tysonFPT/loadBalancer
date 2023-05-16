@@ -130,23 +130,3 @@ test("Trace Tree View", async ({ page, vrt }) => {
     await vrt.trackPage(page, "Trace Tree View", { diffTollerancePercent: 0.9999 });
     //await nextPage.openContextMenu(element)
 });
-
-
-/* test.skip("Self Service", async ({ page, vrt }) => {
-    const welcomePage = new WelcomePage(page);   
-    expect(welcomePage.checkArrow()).toBeTruthy();   
-    await welcomePage.clickOnSelfService();
-    expect(welcomePage.checkArrow()).toBeTruthy();
-    await vrt.trackPage(page, "Self Service");
-    console.log(stopwatch.getTime());
-});
-
-test.skip("Corporate Office", async ({ page, vrt }) => {
-    const welcomePage = new WelcomePage(page);   
-    expect(welcomePage.checkArrow()).toBeTruthy();   
-    await welcomePage.clickOnCorporateOffice();
-    expect(welcomePage.checkArrow()).toBeTruthy();
-    await vrt.trackPage(page, "Corporate Office");
-    console.log(stopwatch.getTime());
-});
- */

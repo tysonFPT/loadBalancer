@@ -1,9 +1,9 @@
 import { expect, Page, test as base } from "@playwright/test";
 import { PlaywrightVisualRegressionTracker, Config } from "@visual-regression-tracker/agent-playwright";
-import { LoginPage } from "../pages/loginPage";
-import { LogoffPage } from "../pages/log_offPage";
-import { WelcomePage } from "../pages/welcomePage";
-import { config, username, password } from "../config/constants";
+import { LoginPage } from "../../pages/loginPage";
+import { LogoffPage } from "../../pages/log_offPage";
+import { WelcomePage } from "../../pages/welcomePage";
+import { config, usernameLB1, password } from "../../config/constants";
 
 import fs from 'fs';
 import path from 'path';

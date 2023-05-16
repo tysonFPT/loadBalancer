@@ -4,6 +4,7 @@ export class NextPage {
     optProperties: any;
     //firstRow: any;
     option: string;
+    mode: string;
     constructor(public page: Page) {
         //this.page = page;
         this.element = page.locator('h1', { hasText: 'Installation' });
@@ -11,37 +12,68 @@ export class NextPage {
         //this.firstRow = page.locator('td:nth-child(4)').first(); //alebo  locator('.nscale-icon-empty-mask').first() alebo  locator('td:nth-child(3)').first()
     }
 
-    async openContextMenuInto(option) {
+    async indexMask() {
+        const inpName = this.page.getByLabel('Name*');
+        const inpComment = this.page.getByLabel('Comment');
 
-        const firstRow = this.page.locator('td:nth-child(4)').first(); //alebo  locator('.nscale-icon-empty-mask').first() alebo  locator('td:nth-child(3)').first()
-        const optProperties = this.page.getByRole('menuitem', { name: 'Properties' }).getByText('Properties');
-        await firstRow.waitFor({ state: "visible" });
-        await firstRow.click({ button: 'right' });
-        await optProperties.waitFor({ state: "visible" });
-        await this.page.getByRole('menuitem', { name: `${option}` }).getByText(`${option}`).click();
-        await this.page.pause();
-        await this.page.waitForLoadState();
-        await this.page.locator((//div[@class="nw-snippetboard-tabear sideBySide"]//span[contains(text(),(`${option}`)]').waitFor({ state: "visible" });
-        //return arrow;
+        //await this.page.pause();
+        await this.page.waitForTimeout(4567);
+        await inpComment.waitFor({ state: "visible" });
+        await expect(inpComment).toBeVisible();
+        //await this.page.pause();
     }
 
     async maskDefaultSearch() {
-        const region = this.page.getByRole('textbox', { name: 'Region' });
+        const inpName = this.page.locator("//div/label[text()='Name']/following-sibling::input");
+        const inpVerCreation = this.page.locator("//div/label[text()='Version creation']/following-sibling::div//input"); // 2 inputs
+        const inpVerCreationFrom = this.page.getByRole('textbox', { name: 'Version creation - From' });
+        const inpVerCreationTo = this.page.getByRole('textbox', { name: 'Version creation - From' });
+
+        const region = this.page.locator('//input[@class="select2-search__field"]');
         const station = this.page.getByLabel('Station');
         const objektlasse = this.page.getByLabel('Objektklasse');
         const register = this.page.getByLabel('Register');
         const Equimentnummer = this.page.getByLabel('Equimentnummer');
         //await this.page.pause();
-        await region.waitFor({state:"visible"});
+        await inpName.waitFor({ state: "visible" });
+        await expect(inpName).toBeVisible();
+
+    }
+
+    async selectOptionInContextMenu(option, mode) {
+        console.log(' option = ' + option + ' ; mode = ' + mode);
+        var firstRow: any;
+        if (mode == "default") {
+            firstRow = this.page.locator('//div[@class="nscale-icon-collection_s-mask maskIcon"]').first();
+            //console.log(' default search ');
+        } else {
+            firstRow = this.page.locator('//div/div[@class="nscale-icon-collectionnonav_s-mask maskIcon"]').first();
+            //console.log(' navigation search ');
+        }
+        //await this.page.pause();
+        //const firstRow = this.page.locator('td:nth-child(4)').first(); //alebo  locator('.nscale-icon-empty-mask').first() alebo  locator('td:nth-child(3)').first()
+        //const firstRow = this.page.locator('//div[@class="nscale-icon-collection_s-mask maskIcon"]').first();
+        const optProperties = this.page.getByRole('menuitem', { name: 'Properties' }).getByText('Properties');
+        //await this.page.pause();
+        await firstRow.waitFor({ state: "visible" });
+        await firstRow.click({ button: 'right' });
+        await optProperties.waitFor({ state: "visible" });
+        await this.page.getByRole('menuitem', { name: `${option}` }).getByText(`${option}`).click();
+        await this.page.waitForLoadState();
+        //await this.page.locator(('//div[@class="nw-snippetboard-tabear sideBySide"]//span[contains(text(),(`${option}`)]').waitFor({ state: "visible" });
+        //return arrow;
+    }
+
+    async maskNavigationSearch() {
+        const region = this.page.getByRole('textbox', { name: 'Region' }).first();
+        const station = this.page.getByLabel('Station');
+        const objektlasse = this.page.getByLabel('Objektklasse');
+        const register = this.page.getByLabel('Register');
+        const Equimentnummer = this.page.getByLabel('Equimentnummer');
+        //await this.page.pause();
+        await this.page.waitForTimeout(2345);
+        await region.waitFor({ state: "visible" });
         await expect(region).toBeVisible();
-        const optionWelcome = this.page.getByRole('option', { name: 'Willkommen' }).locator('div');
-        
-        await optionWelcome.click();
-        //const welcomeTab = this.page.locator('tab_welcome1_EEM');
-        //const welcomeTab =this.page.getByRole('tab', { name: 'Willkommen' }).getByTitle('Willkommen').getByText('Willkommen');
-        const welcomeTab = this.page.locator("(//span[text()='Willkommen'])[2]");
-        await welcomeTab.waitFor({ state: "visible" });
-        //await welcomeTab.click();
     }
 
     async clickOnGRID() {
@@ -52,7 +84,6 @@ export class NextPage {
         const tdEingang = this.page.locator("//td[text()='Eingang']");
         const tdKMMünchen = this.page.locator("//td[text()='KM München']");
         const headKMMünchen = this.page.$("//h3[@title='KM München']")
-        
         //await this.page.pause();
         await tabAnwendungen.click();
         await this.page.waitForLoadState();
@@ -71,7 +102,6 @@ export class NextPage {
         await tdKMMünchen.click();
         await tdKMMünchen.dblclick();
 
-        
         await this.page.waitForLoadState();
 
         await btnBAG.waitFor({ state: "visible" });
@@ -81,7 +111,7 @@ export class NextPage {
         const iconButton = this.page.locator("//button[@class='icon-button']");
         await iconButton.click();
         await this.page.waitForLoadState();
-        await this.page.pause();
+        //await this.page.pause();
         const arrowDropDown = this.page.locator("//nscale-icon[@class='dropdown-side-icon iconSmall iconHover']");
         const devaultDmsGrid = this.page.locator("//div[@id='docArea-displayname'][contains(text(),'DMS@GRID')]");
         console.log("devaultDmsGrid = " + devaultDmsGrid);
@@ -92,7 +122,7 @@ export class NextPage {
         const visible = await devaultDmsGrid.isVisible();
         console.log("visible = " + visible);
         if (!visible) {
-            
+
             await arrowDropDown.click();
             await optionDmsGrid.waitFor({ state: "visible" });
             await this.page.waitForTimeout(1234);
@@ -102,15 +132,14 @@ export class NextPage {
             await this.page.locator('.nw-recentboards-overlay').click();
         }
         await this.page.pause();
-        
+
     }
 
     async openOnWelcomeTab() {
         const general = this.page.getByRole('option', { name: 'General' }).locator('div');
-        //await this.page.pause();
         await general.hover();
         const optionWelcome = this.page.getByRole('option', { name: 'Willkommen' }).locator('div');
-        await optionWelcome.waitFor({state:"visible"});
+        await optionWelcome.waitFor({ state: "visible" });
         await optionWelcome.click();
         //const welcomeTab = this.page.locator('tab_welcome1_EEM');
         //const welcomeTab =this.page.getByRole('tab', { name: 'Willkommen' }).getByTitle('Willkommen').getByText('Willkommen');
@@ -119,15 +148,12 @@ export class NextPage {
         //await welcomeTab.click();
     }
 
- /*    async openContextMenu(element, optProperties) {
-        
-        await element.waitFor({ state: "visible" });
-        await element.click({ button: 'right' });
-        await optProperties.waitFor({ state: "visible" });
-        await optProperties.click();
-        await this.page.locator("(//span[@data-update-zone='^']//span)[contains(text(), 'Properties')]").waitFor({ state: "visible" });
-        //return arrow;
-    } */
-
-   
+    /*    async openContextMenu(element, optProperties) {           
+           await element.waitFor({ state: "visible" });
+           await element.click({ button: 'right' });
+           await optProperties.waitFor({ state: "visible" });
+           await optProperties.click();
+           await this.page.locator("(//span[@data-update-zone='^']//span)[contains(text(), 'Properties')]").waitFor({ state: "visible" });
+           //return arrow;
+       } */
 } 

@@ -1,9 +1,9 @@
 import { expect, Page, test as base } from "@playwright/test";
 import { PlaywrightVisualRegressionTracker, Config } from "@visual-regression-tracker/agent-playwright";
-import { LoginPage } from "../pages/loginPage";
-import { LogoffPage } from "../pages/log_offPage";
-import { WelcomePage } from "../pages/welcomePage";
-import { config, username, password, dmsUrl } from "../config/constants";
+import { LoginPage } from "../../pages/loginPage";
+import { LogoffPage } from "../../pages/log_offPage";
+import { WelcomePage } from "../../pages/welcomePage";
+import { config, username, password, dmsUrl } from "../../config/constants";
 
 type TestFixtures = {
     vrt: PlaywrightVisualRegressionTracker;

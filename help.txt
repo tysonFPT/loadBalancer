@@ -20,3 +20,32 @@ icons of navigational search :      //div[@class="nscale-icon-collectionnonav_s-
 
 nw-snippetboard-tabear sideBySide
 check Search tab :       //div[@class="nw-snippetboard-tabear sideBySide"]//span[contains(text(),'Search')]
+
+//div[@class="nscale-icon-collectionnonav_s-mask maskIcon"]
+
+
+
+ var mode: string = "default";
+
+switch (mode) {
+    case 'default': console.log('Go to North Direction');
+        break;
+    case 'navigation': console.log('Go to Eest Direction');
+        break;
+    case 'south': console.log('Go to Soutch Direction');
+        break;
+    case 'west': console.log('Go to West Direction')
+        break;
+    default:
+        console.log('invalid direction');
+}
+var mode: string = "default";
+ if (mode = "default") {
+            
+            console.log('default search');
+
+            
+        } else {
+            console.log('navigation search');
+
+        }
